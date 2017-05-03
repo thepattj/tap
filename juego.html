@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="estilos.css">
+        <link href="https://fonts.googleapis.com/css?family=Revalia" rel="stylesheet">
+    </head>
+    <body>
+        
+        <div class="pantalla-juego verde">
+            <div class="arriba">
+                <img src="corazon2.png" id="vida1">
+                <img src="corazon2.png" id="vida2">
+                <img src="corazon2.png" id="vida3">
+                <button><img src="settings9.png" id="config"></button>
+            </div>
+            <div class="nivel">
+                <h2>1</h2>
+            </div>
+            <div class="puntos">
+                <h1>PUNTOS: XXX</h1>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        var colorAnterior = "verde"; //ver como poder hacer que tome un valor anterior
+        var tiempo = 2000;
+        var puntos = 0;
+        var nivelActual = 1;
+        var vidas = 3;
+
+        function navegar(liga){
+            window.location.assign(liga);
+        }
+
+        function inicializar(){
+            rotacion();
+            peq();
+        }
+
+        function rotacion(){
+           colores=["verde","azul","morado","amarillo","naranja","rojo","turquesa", "blanco", "negro","rosa","plata","cafe"];
+           color=Math.random() * 12;
+           color = parseInt(color);
+           //console.log(color);
+            
+           pantalla = document.querySelector('.pantalla-juego'); //selecciona la clase
+           pantalla.classList.add(colores[color]);//agrega el color a la clase de pantalla-juego
+           coloractual = document.querySelector('.pantalla-juego').className;
+           pantalla.classList.remove(colorAnterior);//quita el color anterior de la clase
+           colorAnterior = colores[color];// ERROR ELIMINA A LA ULTIMA           
+           setTimeout(function() {rotacion();}, tiempo);
+        } 
+        window.addEventListener('load',inicializar,true);
+
+        function peq(){
+            colors = Math.random() * 12;
+            colors = parseInt(colors);
+            
+            nivel = document.querySelector('.nivel');
+            nivel.classList.add(colores[colors]);
+        } 
+        
+        window.addEventListener('touchstart', toque, true);
+        //window.addEventListener('click', toque, true);
+
+        function toque(){
+            colorDeFondo = document.querySelector('.pantalla-juego').className;
+            colorF = colorDeFondo.split(" ");
+            //console.log(colorF)
+            colorDeCuadro = document.querySelector('.nivel').className;
+            colorC = colorDeCuadro.split(" ");
+            //console.log(colorC)
+            if(colorF[1] == colorC[1]){
+                ganar();
+            }if(colorF[1] != colorC[1]){
+                perder();
+            }
+            
+        }
+
+        function ganar(){
+            puntos = puntos + 15;
+            document.querySelector('.puntos>h1').innerHTML = "PUNTOS: " + puntos;
+            nivelActual++;
+            document.querySelector('.nivel').innerHTML = nivelActual;
+            tiempo = tiempo - 70;
+            document.querySelector('.nivel').classList.remove(colores[color]);
+            peq();
+        }
+
+        function perder(){
+            vidaPerdidda = document.querySelector('#vida' + vidas);
+            vidaPerdidda.style.transition="1s all";
+            vidaPerdidda.style.webkitTransform="scale(2)";
+            vidaPerdidda.style.opacity="0";
+            vidas--;
+            if(vidas==0){
+                localStorage.setItem("puntos", puntos);
+                localStorage.setItem("nivel", nivelActual);
+                window.location.assign('gameover.html');
+            }
+        }
+    </script>
+</html>
