@@ -12,8 +12,9 @@
                 <img src="corazon2.png" id="vida1">
                 <img src="corazon2.png" id="vida2">
                 <img src="corazon2.png" id="vida3">
-                <button><img src="settings9.png" id="config"></button>
+                <button onclick="configurar()"><img src="settings9.png" id="config"></button>
             </div>
+            
             <div class="nivel">
                 <h2>1</h2>
             </div>
@@ -28,6 +29,7 @@
         var tiempo = 2000;
         var puntos = 0;
         var nivelActual = 1;
+        var colores=["verde","azul","morado","amarillo","naranja","rojo","turquesa", "blanco", "negro","rosa","plata","cafe"];
         var vidas = 3;
 
         function navegar(liga){
@@ -40,16 +42,21 @@
         }
 
         function rotacion(){
-           colores=["verde","azul","morado","amarillo","naranja","rojo","turquesa", "blanco", "negro","rosa","plata","cafe"];
            color=Math.random() * 12;
            color = parseInt(color);
            //console.log(color);
-            
-           pantalla = document.querySelector('.pantalla-juego'); //selecciona la clase
-           pantalla.classList.add(colores[color]);//agrega el color a la clase de pantalla-juego
-           coloractual = document.querySelector('.pantalla-juego').className;
+            if(colores[color] == colorAnterior){
+                if(color == 0){
+                    color++;
+                }else{
+                    color--;
+                }   
+            }
+            pantalla = document.querySelector('.pantalla-juego'); //selecciona la clase
+            pantalla.classList.add(colores[color]);//agrega el color a la clase de pantalla-juego
+           coloractual = document.querySelector('.pantalla-juego').className; //la pantalla que ya tiene el coloractual y anterior
            pantalla.classList.remove(colorAnterior);//quita el color anterior de la clase
-           colorAnterior = colores[color];// ERROR ELIMINA A LA ULTIMA           
+           colorAnterior = colores[color];// ERROR ELIMINA A LA ULTIMA
            setTimeout(function() {rotacion();}, tiempo);
         } 
         window.addEventListener('load',inicializar,true);
@@ -77,7 +84,6 @@
             }if(colorF[1] != colorC[1]){
                 perder();
             }
-            
         }
 
         function ganar(){
@@ -101,6 +107,10 @@
                 localStorage.setItem("nivel", nivelActual);
                 window.location.assign('gameover.html');
             }
+        }
+
+        function configurar(){
+
         }
     </script>
 </html>
