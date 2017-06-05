@@ -161,14 +161,8 @@
     color: white
 }
 
-.blanco{
-    background: #FFFFFF;
-}
 .negro{
     background: #000000;
-}
-.verde{
-    background: #2ecc71;
 }
 .azul{
     background: #2980b9;
@@ -179,21 +173,12 @@
 .amarillo{
     background: #f1c40f;
 }
-.naranja{
-    background: #f39c12;
+.cafe{
+    background: #4b3621;
 }
 .rojo{
     background: #e74c3c;
 }
 .turquesa{
     background: #1abc9c;
-}
-.rosa{
- background: #E91E63;
-}
-.plata{
-    background: #bdc3c7;
-}
-.cafe{
-    background: #795548;
 }

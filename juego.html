@@ -26,10 +26,10 @@
 
     <script>
         var colorAnterior = "verde"; //ver como poder hacer que tome un valor anterior
-        var tiempo = 1350;
+        var tiempo = 1180;
         var puntos = 0;
         var nivelActual = 1;
-        var colores=["verde","azul","morado","amarillo","naranja","rojo","turquesa", "blanco", "negro","rosa","plata","cafe"];
+        var colores=["azul","morado","amarillo","cafe","rojo","turquesa", "negro"];
         var vidas = 3;
 
         function navegar(liga){
@@ -42,7 +42,7 @@
         }
 
         function rotacion(){
-           color=Math.random() * 12;
+           color=Math.random() * 7;
            color = parseInt(color);
            //console.log(color);
             if(colores[color] == colorAnterior){
@@ -62,7 +62,7 @@
         window.addEventListener('load',inicializar,true);
 
         function peq(){
-            colors = Math.random() * 12;
+            colors = Math.random() * 7;
             colors = parseInt(colors);
             
             nivel = document.querySelector('.nivel');
